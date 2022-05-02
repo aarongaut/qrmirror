@@ -1,0 +1,21 @@
+{
+  "name": "qrmirror",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Aaron Gaut <git@aarongaut.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./index.js",
+    "dev": "nodemon ./index.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.7",
+    "express": "^4.18.1",
+    "js-base64": "^3.7.2",
+    "pako": "^2.0.4",
+    "qrcode": "^1.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
