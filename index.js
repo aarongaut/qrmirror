@@ -2,8 +2,18 @@ const path = require("path");
 const express = require("express");
 const process = require("process");
 
-const { decodeData, decompressData, encodeData, compressData, extractData, formUrl, extractText } = require("./controllers/compression.js");
-const { createQRCode } = require("./controllers/qr.js");
+const {
+  decodeData,
+  decompressData,
+  encodeData,
+  compressData,
+  extractData,
+  formUrl,
+  extractText,
+  renderMarkdown,
+  setAboutText,
+  createQRCode,
+} = require("./controller.js");
 
 const app = express();
 const PORT = 8000;
@@ -12,8 +22,22 @@ app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./static/index.html"))
+app.get("/",
+  setAboutText,
+  compressData,
+  encodeData,
+  formUrl,
+  (req, res) => {
+    res.redirect(res.locals.url)
+  }
+);
+
+app.get("/style.css", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./static/style.css"));
+});
+
+app.get("/favicon.ico", (req, res) => {
+  res.sendStatus(404);
 });
 
 app.post("/api/mirror/",
@@ -30,11 +54,12 @@ app.get("/:data",
   extractData,
   decodeData,
   decompressData,
+  renderMarkdown,
   formUrl,
   createQRCode,
   (req, res) => {
-    const { qr, text } = res.locals;
-    res.render('mirror', { qr, text })
+    const { qr, rawText, formattedText } = res.locals;
+    res.render('mirror', { qr, rawText, formattedText })
   }
 );
 

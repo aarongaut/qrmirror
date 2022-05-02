@@ -1,0 +1,21 @@
+body {
+  margin: auto;
+  max-width: 650px;
+  background-color: #111;
+  color: #eee;
+  font-family: sans-serif;
+  line-height: 1.5em;
+}
+
+a {
+  color: #eee;
+}
+
+#qr-container {
+  text-align: center;
+  padding: 10px;
+}
+
+textarea {
+  width: 100%;
+}
