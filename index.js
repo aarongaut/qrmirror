@@ -8,7 +8,7 @@ const {
   encodeData,
   compressData,
   extractData,
-  formUrl,
+  formUrls,
   extractText,
   renderMarkdown,
   setAboutText,
@@ -26,9 +26,9 @@ app.get("/",
   setAboutText,
   compressData,
   encodeData,
-  formUrl,
+  formUrls,
   (req, res) => {
-    res.redirect(res.locals.url)
+    res.redirect(res.locals.urls.page)
   }
 );
 
@@ -44,22 +44,40 @@ app.post("/api/mirror/",
   extractText,
   compressData,
   encodeData,
-  formUrl,
+  formUrls,
   (req, res) => {
-    res.redirect(res.locals.url)
+    res.redirect(res.locals.urls.page);
   }
 );
+
+app.get("/i/:data.svg",
+  extractData,
+  formUrls,
+  createQRCode,
+  (req, res) => {
+    res.set("Content-Type", "image/svg+xml");
+    res.send(res.locals.qr);
+  }
+);
+
+app.get("/zoom/:data",
+  extractData,
+  formUrls,
+  (req, res) => {
+    const { urls } = res.locals;
+    res.render("zoom", { urls });
+  }
+)
 
 app.get("/:data",
   extractData,
   decodeData,
   decompressData,
   renderMarkdown,
-  formUrl,
-  createQRCode,
+  formUrls,
   (req, res) => {
-    const { qr, rawText, formattedText } = res.locals;
-    res.render('mirror', { qr, rawText, formattedText })
+    const { qr, rawText, formattedText, urls } = res.locals;
+    res.render('mirror', { qr, rawText, formattedText, urls });
   }
 );
 

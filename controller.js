@@ -36,8 +36,12 @@ const decompressData = (req, res, next) => {
   }
 };
 
-const formUrl = (req, res, next) => {
-  res.locals.url = `${PREFIX}/${res.locals.b64data}`;
+const formUrls = (req, res, next) => {
+  res.locals.urls = {
+    page: `${PREFIX}/${res.locals.b64data}`,
+    img: `${PREFIX}/i/${res.locals.b64data}.svg`,
+    zoom: `${PREFIX}/zoom/${res.locals.b64data}`,
+  };
   next();
 };
 
@@ -66,7 +70,7 @@ const setAboutText = (req, res, next) => {
 };
 
 const createQRCode = ((req, res, next) => {
-  QRCode.toDataURL(res.locals.url)
+  QRCode.toString(res.locals.urls.page, { type: "svg" })
     .then(qr => {
       res.locals.qr = qr;
       next();
@@ -79,7 +83,7 @@ module.exports = {
   decompressData,
   encodeData,
   compressData,
-  formUrl,
+  formUrls,
   extractData,
   extractText,
   renderMarkdown,

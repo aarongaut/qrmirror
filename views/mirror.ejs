@@ -3,14 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title>QR Mirror</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
     <header>
       <a href="/">About</a>
     </header>
     <div id="content">
-      <div id="qr-container"><img src="<%= qr %>"></img></div>
+      <div id="qr-container">
+	<a href="<%= urls.zoom %>">
+          <img src="<%= urls.img %>"></img>
+	</a>
+      </div>
       <div><%- formattedText %></div>
       <hr/>
       <form action="/api/mirror/" method="post">
