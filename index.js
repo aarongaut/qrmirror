@@ -81,6 +81,13 @@ app.get("/:data",
   }
 );
 
+app.use((req, res, next) => {
+  next({
+    clientErrorMessage: "Not found",
+    statusCode: 404,
+  });
+});
+
 app.use((err, req, res, next) => {
   console.log(err);
   if (err.type === "entity.too.large") {
