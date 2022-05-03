@@ -14,9 +14,9 @@ const {
   setAboutText,
   createQRCode,
 } = require("./controller.js");
+const { PORT } = require("./constants.js");
 
 const app = express();
-const PORT = 8000;
 
 app.set("view engine", "ejs");
 
@@ -68,4 +68,4 @@ app.use((err, req, res, next) => {
   res.sendStatus(500);
 });
 
-app.listen(8000, () => { console.log("Listening") });
+app.listen(PORT, () => { console.log("Listening") });

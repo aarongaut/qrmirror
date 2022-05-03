@@ -5,7 +5,7 @@ const md = require('markdown-it')();
 const QRCode = require('qrcode');
 const { Base64 } = require('js-base64');
 
-const { DOMAIN } = require('./constants.js');
+const { PREFIX } = require('./constants.js');
 
 const decodeData = (req, res, next) => {
   if (!Base64.isValid(res.locals.b64data)) {
@@ -37,7 +37,7 @@ const decompressData = (req, res, next) => {
 };
 
 const formUrl = (req, res, next) => {
-  res.locals.url = `${DOMAIN}/${res.locals.b64data}`;
+  res.locals.url = `${PREFIX}/${res.locals.b64data}`;
   next();
 };
 
