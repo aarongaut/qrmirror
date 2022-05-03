@@ -39,3 +39,7 @@ textarea {
   background-color: #282835;
   color: #fff;
 }
+
+.error {
+  color: #ff5773;
+}

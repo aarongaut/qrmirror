@@ -10,7 +10,10 @@ const { PREFIX } = require('./constants.js');
 const decodeData = (req, res, next) => {
   if (!Base64.isValid(res.locals.b64data)) {
     console.log(res.locals);
-    next('Invalid param');
+    next({
+      statusCode: 400,
+      clientErrorMessage: "Invalid URL - failed to decode message",
+    });
   }
   res.locals.data = Base64.toUint8Array(res.locals.b64data);
   next();
@@ -32,7 +35,10 @@ const decompressData = (req, res, next) => {
     next();
   }
   catch (err) {
-    next(err);
+    next({
+      statusCode: 400,
+      clientErrorMessage: "Invalid URL - failed to deflate message data",
+    });
   }
 };
 
@@ -75,7 +81,10 @@ const createQRCode = ((req, res, next) => {
       res.locals.qr = qr;
       next();
     })
-    .catch(err => next(err))
+    .catch(err => next({
+      statusCode: 400,
+      clientErrorMessage: "Message too large to fit in a QR code",
+    }))
 });
 
 module.exports = {

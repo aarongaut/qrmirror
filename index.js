@@ -83,7 +83,18 @@ app.get("/:data",
 
 app.use((err, req, res, next) => {
   console.log(err);
-  res.sendStatus(500);
+  if (err.type === "entity.too.large") {
+    err = {
+      clientErrorMessage: "Message too large",
+      statusCode: 413,
+    };
+  }
+  const defaultClientError = {
+    clientErrorMessage: "Unknown error",
+    statusCode: 500, 
+  };
+  const { clientErrorMessage, statusCode } = Object.assign(defaultClientError, err);
+  res.status(statusCode).render("error", { statusCode, clientErrorMessage });
 });
 
 app.listen(PORT, () => { console.log("Listening") });
