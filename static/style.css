@@ -14,6 +14,11 @@ a {
   color: #eee;
 }
 
+img {
+  /* use nearest neighbord interp for QR code */
+  image-rendering: crisp-edges;
+}
+
 #qr-container {
   text-align: center;
   padding: 10px;
