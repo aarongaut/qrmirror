@@ -8,7 +8,7 @@ Give it a try by changing the text below and hitting *Go!*. If you scan the resu
 
 ## Formatting
 
-You can use [markdown](https://www.markdownguide.org/basic-syntax/) for *rich* **text** formatting.
+You can use [markdown](https://www.markdownguide.org/basic-syntax/) for *rich* **text** formatting. To prevent formatting, you can wrap the message in triple backticks (```).
 
 ## Source code
 
