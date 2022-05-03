@@ -1,5 +1,5 @@
 body {
-  background-color: #111;
+  background-color: #101018;
   color: #eee;
   font-family: sans-serif;
   line-height: 1.5em;
@@ -21,4 +21,6 @@ a {
 
 textarea {
   width: 100%;
+  background-color: #282835;
+  color: #fff;
 }
