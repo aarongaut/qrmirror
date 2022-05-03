@@ -1,10 +1,13 @@
 body {
-  margin: auto;
-  max-width: 650px;
   background-color: #111;
   color: #eee;
   font-family: sans-serif;
   line-height: 1.5em;
+}
+
+#content {
+  margin: auto;
+  max-width: 650px;
 }
 
 a {

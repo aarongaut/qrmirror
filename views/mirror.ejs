@@ -6,13 +6,18 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div id="qr-container"><img src="<%= qr %>"></img></div>
-    <div><%- formattedText %></div>
-    <hr/>
-    <form action="/api/mirror/" method="post">
-      <label for="message">Edit message: </label>
-      <textarea id="message" name="text" rows="15"><%= rawText %></textarea>
-      <input type="submit" value="Go!">
-    </form>
+    <header>
+      <a href="/">Home</a>
+    </header>
+    <div id="content">
+      <div id="qr-container"><img src="<%= qr %>"></img></div>
+      <div><%- formattedText %></div>
+      <hr/>
+      <form action="/api/mirror/" method="post">
+        <label for="message">Edit message: </label>
+        <textarea id="message" name="text" rows="15"><%= rawText %></textarea>
+        <input type="submit" value="Go!">
+      </form>
+    </div>
   </body>
 </html>
