@@ -24,7 +24,11 @@
       <form action="/api/mirror/" method="post">
         <label for="message">Edit message: </label>
         <textarea id="message" name="text" rows="15"><%= rawText %></textarea>
-        <input type="submit" value="Go!">
+	<div id="buttons">
+          <input type="submit" value="Go!">
+	  <input type="button" value="Clear">
+	  <input type="button" value="Copy">
+	</div>
       </form>
     </div>
   </body>

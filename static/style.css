@@ -38,8 +38,29 @@ textarea {
   width: 100%;
   background-color: #282835;
   color: #fff;
+  box-sizing: border-box;
 }
 
 .error {
   color: #ff5773;
+}
+
+#buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+#buttons > * {
+  flex: 1 0 auto;
+  background-color: #000;
+  border: 1px solid #eee;
+  color: #fff;
+  font-size: 2rem;
+  padding: 5px;
+}
+
+#buttons > *:hover {
+  background-color: #fff;
+  color: #000;
 }
