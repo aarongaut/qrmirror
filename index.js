@@ -26,9 +26,11 @@ app.get("/",
   setAboutText,
   compressData,
   encodeData,
+  renderMarkdown,
   formUrls,
   (req, res) => {
-    res.redirect(res.locals.urls.page)
+    const { rawText, formattedText, urls } = res.locals;
+    res.render('mirror', { rawText, formattedText, urls });
   }
 );
 
@@ -80,8 +82,8 @@ app.get("/:data",
   renderMarkdown,
   formUrls,
   (req, res) => {
-    const { qr, rawText, formattedText, urls } = res.locals;
-    res.render('mirror', { qr, rawText, formattedText, urls });
+    const { rawText, formattedText, urls } = res.locals;
+    res.render('mirror', { rawText, formattedText, urls });
   }
 );
 

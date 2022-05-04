@@ -9,7 +9,6 @@ const { PREFIX } = require('./constants.js');
 
 const decodeData = (req, res, next) => {
   if (!Base64.isValid(res.locals.b64data)) {
-    console.log(res.locals);
     next({
       statusCode: 400,
       clientErrorMessage: "Invalid URL - failed to decode message",
@@ -67,7 +66,7 @@ const renderMarkdown = (req, res, next) => {
 };
 
 const setAboutText = (req, res, next) => {
-  fs.promises.readFile(path.resolve(__dirname, './static/about.md'))
+  fs.promises.readFile(path.resolve(__dirname, './static/about.md'), { encoding: "utf-8" })
     .then(text => {
       res.locals.rawText = text;
       next();
