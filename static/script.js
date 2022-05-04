@@ -1,9 +1,9 @@
 function clearText() {
   const textarea = document.querySelector("#message");
-  textarea.innerText = "";
+  textarea.value = "";
 }
 
 function copyText() {
   const textarea = document.querySelector("#message");
-  navigator.clipboard.writeText(textarea.innerText);
+  navigator.clipboard.writeText(textarea.value);
 }
