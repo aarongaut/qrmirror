@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>QR Mirror</title>
     <link rel="stylesheet" href="/style.css">
+    <script src="/script.js"></script>
   </head>
   <body>
     <header>
@@ -26,8 +27,8 @@
         <textarea id="message" name="text" rows="15"><%= rawText %></textarea>
 	<div id="buttons">
           <input type="submit" value="Go!">
-	  <input type="button" value="Clear">
-	  <input type="button" value="Copy">
+	  <input type="button" value="Clear" onclick="clearText()">
+	  <input type="button" value="Copy" onclick="copyText()">
 	</div>
       </form>
     </div>

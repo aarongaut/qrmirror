@@ -36,6 +36,10 @@ app.get("/style.css", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./static/style.css"));
 });
 
+app.get("/script.js", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./static/script.js"));
+});
+
 app.get("/favicon.ico", (req, res) => {
   res.sendStatus(404);
 });
