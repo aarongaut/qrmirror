@@ -43,9 +43,10 @@ const decompressData = (req, res, next) => {
 
 const formUrls = (req, res, next) => {
   res.locals.urls = {
-    page: `${PREFIX}/${res.locals.b64data}`,
-    img: `${PREFIX}/i/${res.locals.b64data}.svg`,
-    zoom: `${PREFIX}/zoom/${res.locals.b64data}`,
+    qrLink: `${PREFIX}/${res.locals.b64data}`,
+    page: `/${res.locals.b64data}`,
+    img: `/i/${res.locals.b64data}.svg`,
+    zoom: `/zoom/${res.locals.b64data}`,
   };
   next();
 };
@@ -75,7 +76,7 @@ const setAboutText = (req, res, next) => {
 };
 
 const createQRCode = ((req, res, next) => {
-  QRCode.toString(res.locals.urls.page, { type: "svg" })
+  QRCode.toString(res.locals.urls.qrLink, { type: "svg" })
     .then(qr => {
       res.locals.qr = qr;
       next();
