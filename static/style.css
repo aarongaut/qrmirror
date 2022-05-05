@@ -3,7 +3,7 @@ body {
   color: #eee;
   font-family: sans-serif;
   line-height: 1.5em;
-  margin: 0;
+  margin: 5px;
 }
 
 #content {
@@ -15,14 +15,18 @@ a {
   color: #eee;
 }
 
-img, .zoom {
-  box-sizing: border-box;
+img.zoom {
+  position: fixed;
+  /* Setting both ends to 0 gives the 'margin: auto' behavior, causing the
+   * image to be centered with 'position: fixed'. */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
   max-width: 100vw;
   max-height: 100vh;
-  padding: 5px;
   overflow: hidden;
-  margin: auto;
-  display: block;
 }
 
 #qr-container {
@@ -51,16 +55,21 @@ textarea {
   gap: 5px;
 }
 
-#buttons > * {
+#buttons > input {
   flex: 1 0 auto;
   background-color: #000;
   border: 1px solid #eee;
   color: #fff;
   font-size: 2rem;
   padding: 5px;
+  cursor: pointer;
 }
 
-#buttons > *:hover {
+#buttons > input:hover {
   background-color: #fff;
   color: #000;
+}
+
+#buttons > input:active {
+  transform: translatey(3px);
 }
