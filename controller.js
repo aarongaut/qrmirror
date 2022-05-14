@@ -24,7 +24,7 @@ const encodeData = (req, res, next) => {
 };
 
 const compressData = (req, res, next) => {
-  res.locals.data = pako.deflate(res.locals.rawText);
+  res.locals.data = pako.deflate(res.locals.rawText, { level: 9 });
   next();
 };
 
