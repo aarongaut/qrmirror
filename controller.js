@@ -1,11 +1,12 @@
 const fs = require('fs');
 const path = require('path');
-const pako = require('pako');
 const md = require('markdown-it')();
 const QRCode = require('qrcode');
 const { Base64 } = require('js-base64');
 
 const { PREFIX } = require('./config.js');
+
+const { compressor } = require('./compress/default.js');
 
 const decodeData = (req, res, next) => {
   if (!Base64.isValid(res.locals.b64data)) {
@@ -24,13 +25,15 @@ const encodeData = (req, res, next) => {
 };
 
 const compressData = (req, res, next) => {
-  res.locals.data = pako.deflate(res.locals.rawText);
+  res.locals.data = compressor.compress(res.locals.rawText);
+  //res.locals.data = pako.deflate(res.locals.rawText);
   next();
 };
 
 const decompressData = (req, res, next) => {
   try {
-    const rawText = pako.inflate(res.locals.data, { to: 'string' });
+    const rawText = compressor.decompress(res.locals.data);
+    //const rawText = pako.inflate(res.locals.data, { to: 'string' });
     if (typeof rawText !== "string") {
       throw Error("pako.inflate returned a non-string");
     }
@@ -40,7 +43,8 @@ const decompressData = (req, res, next) => {
   catch (err) {
     next({
       statusCode: 400,
-      clientErrorMessage: "Invalid URL - failed to deflate message data",
+      clientErrorMessage: "Invalid URL - failed to decompress message data",
+      origin: err,
     });
   }
 };
