@@ -5,7 +5,7 @@ const md = require('markdown-it')();
 const QRCode = require('qrcode');
 const { Base64 } = require('js-base64');
 
-const { PREFIX } = require('./constants.js');
+const { PREFIX } = require('./config.js');
 
 const decodeData = (req, res, next) => {
   if (!Base64.isValid(res.locals.b64data)) {

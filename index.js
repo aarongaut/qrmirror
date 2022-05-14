@@ -15,7 +15,7 @@ const {
   setAboutText,
   setNewText,
 } = require("./controller.js");
-const { PORT } = require("./constants.js");
+const { PORT } = require("./config.js");
 
 const app = express();
 
