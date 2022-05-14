@@ -71,7 +71,7 @@ const renderMarkdown = (req, res, next) => {
 };
 
 const setAboutText = (req, res, next) => {
-  fs.promises.readFile(path.resolve(__dirname, './static/about.md'), { encoding: "utf-8" })
+  fs.promises.readFile(path.resolve(__dirname, './data/about.md'), { encoding: "utf-8" })
     .then(text => {
       res.locals.rawText = text;
       next();
