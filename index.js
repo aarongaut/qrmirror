@@ -3,16 +3,17 @@ const express = require("express");
 const process = require("process");
 
 const {
+  compressData,
+  createQRCode,
   decodeData,
   decompressData,
   encodeData,
-  compressData,
   extractData,
-  formUrls,
   extractText,
+  formUrls,
   renderMarkdown,
   setAboutText,
-  createQRCode,
+  setNewText,
 } = require("./controller.js");
 const { PORT } = require("./constants.js");
 
@@ -23,6 +24,19 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/",
+  setNewText,
+  compressData,
+  encodeData,
+  renderMarkdown,
+  formUrls,
+  (req, res) => {
+    const { rawText, formattedText, urls } = res.locals;
+    res.render('mirror', { rawText, formattedText, urls });
+  }
+);
+
+
+app.get("/about",
   setAboutText,
   compressData,
   encodeData,
@@ -95,18 +109,24 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  console.log(err);
   if (err.type === "entity.too.large") {
     err = {
       clientErrorMessage: "Message too large",
       statusCode: 413,
+      origin: err,
     };
   }
+
   const defaultClientError = {
     clientErrorMessage: "Unknown error",
-    statusCode: 500, 
+    statusCode: 500,
   };
   const { clientErrorMessage, statusCode } = Object.assign(defaultClientError, err);
+
+  if (statusCode >= 500) {
+    console.error("ERROR: ", err);
+  }
+
   res.status(statusCode).render("error", { statusCode, clientErrorMessage });
 });
 

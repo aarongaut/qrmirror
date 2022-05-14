@@ -30,7 +30,11 @@ const compressData = (req, res, next) => {
 
 const decompressData = (req, res, next) => {
   try {
-    res.locals.rawText = pako.inflate(res.locals.data, { to: 'string' });
+    const rawText = pako.inflate(res.locals.data, { to: 'string' });
+    if (typeof rawText !== "string") {
+      throw Error("pako.inflate returned a non-string");
+    }
+    res.locals.rawText = rawText;
     next();
   }
   catch (err) {
@@ -75,6 +79,11 @@ const setAboutText = (req, res, next) => {
     .catch(err => next(err));
 };
 
+const setNewText = (req, res, next) => {
+  res.locals.rawText = "";
+  next();
+};
+
 const createQRCode = ((req, res, next) => {
   QRCode.toString(res.locals.urls.qrLink, { type: "svg" })
     .then(qr => {
@@ -97,5 +106,6 @@ module.exports = {
   extractText,
   renderMarkdown,
   setAboutText,
+  setNewText,
   createQRCode,
 };
