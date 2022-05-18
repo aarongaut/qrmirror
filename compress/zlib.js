@@ -11,17 +11,16 @@ class ZlibCompressor {
 
   decompress(data) {
     if (data[0] !== 120) {
-      /* This is a hack for backwards compatability. When pako was the only
+      /* This is a hack for backwards compatability. When zlib was the only
        * compressor available, the compressed data we output was the exact
-       * output of pako with no leading byte to indicate the compression
-       * method. zlib, pako's underlying algorithm, always generates output
-       * starting with 120. This means if we register PakoCompressor with
-       * EnsembleCompressor using code 120, things that were previously
-       * compressed with pako will be sent to the right place. However, the
-       * EnsembleCompressor uses the first byte to route data to the right
-       * compressor and so strips the byte off. The net effect is that old data
-       * will be correctly sent to PakoCompressor, but the first byte will be
-       * missing. We are re-adding it here.
+       * output of zlib with no leading byte to indicate the compression
+       * method. zlib always generates output starting with 120. This means if
+       * we register ZlibCompressor with EnsembleCompressor using code 120,
+       * things that were previously compressed with zlib will be sent to the
+       * right place. However, the EnsembleCompressor uses the first byte to
+       * route data to the right compressor and so strips the byte off. The net
+       * effect is that old data will be correctly sent to ZlibCompressor, but
+       * the first byte will be missing. We are re-adding it here.
        */
       const newData = new Uint8Array(data.length + 1);
       newData[0] = 120;

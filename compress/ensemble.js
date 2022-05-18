@@ -1,5 +1,12 @@
+/** A compressor that runs multiple compression algorithms and chooses the one
+ * with the best compression ratio for each input. It prepends the output
+ * buffer with 1-byte opcode indicating the compression algorithm which was
+ * used for later decompression
+ */
 class EnsembleCompressor {
-  constructor() {
+  constructor(options) {
+    const { printStats } = options ?? {};
+    this.printStats = printStats;
     this.compressors = {};
   }
 
@@ -49,9 +56,15 @@ class EnsembleCompressor {
             const result = results[i];
             const opcode = opcodes[i];
             if (result.status !== "fulfilled") {
+              if (this.printStats) {
+                console.log(`${opcode} compr failed. reason: ${result.reason}`);
+              }
               continue;
             }
             const data = result.value;
+            if (this.printStats) {
+              console.log(`${opcode} compr size: ${data.length}`);
+            }
             if (data.length < bestSize) {
               bestSize = data.length;
               bestOpcode = opcode;
