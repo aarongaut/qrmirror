@@ -1,7 +1,7 @@
 const pako = require('pako');
 
 // Port of zlib lossless compressor
-class PakoCompressor {
+class ZlibCompressor {
   constructor() {
   }
 
@@ -32,4 +32,4 @@ class PakoCompressor {
   }
 };
 
-module.exports = { PakoCompressor }
+module.exports = { ZlibCompressor }
