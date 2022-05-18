@@ -3,6 +3,7 @@ const { TrivialCompressor } = require("./trivial.js");
 const { ZlibCompressor } = require("./zlib.js");
 const { SmazCompressor } = require("./smaz.js");
 const { XzCompressor } = require("./xz.js");
+const { BwtcCompressor } = require("./bwtc.js");
 const { ENSEMBLE_STATS } = require("../config.js");
 
 const compressor = new EnsembleCompressor({ printStats: ENSEMBLE_STATS });
@@ -29,5 +30,12 @@ compressor.register(121, new SmazCompressor());
 // overtakes zlib for large enough input, but it doesn't seem to be worth it
 // for this application.
 //compressor.register(122, new XzCompressor());
+
+// General purpose compressor.
+// This compressor achieves a similar compression ratio to zlib and somtimes
+// slightly better. Enabling it doesn't make a huge difference, but may allow
+// for slightly larger inputs when we are hitting the limit of what can fit in
+// a QR code
+compressor.register(123, new BwtcCompressor());
 
 module.exports = { compressor };
