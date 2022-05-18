@@ -48,17 +48,7 @@ app.get("/about",
   }
 );
 
-app.get("/style.css", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./static/style.css"));
-});
-
-app.get("/script.js", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./static/script.js"));
-});
-
-app.get("/favicon.ico", (req, res) => {
-  res.sendStatus(404);
-});
+app.use("/static", express.static(path.resolve(__dirname, 'static')));
 
 app.post("/api/mirror/",
   extractText,
