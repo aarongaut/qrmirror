@@ -6,11 +6,11 @@ class SmazCompressor {
   }
 
   compress(text) {
-    return smaz.compress(text);
+    return Promise.resolve(smaz.compress(text));
   }
 
   decompress(data) {
-    return smaz.decompress(data);
+    return Promise.resolve(smaz.decompress(data));
   }
 };
 

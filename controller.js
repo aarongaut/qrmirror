@@ -25,28 +25,32 @@ const encodeData = (req, res, next) => {
 };
 
 const compressData = (req, res, next) => {
-  res.locals.data = compressor.compress(res.locals.rawText);
-  //res.locals.data = pako.deflate(res.locals.rawText);
-  next();
+  compressor.compress(res.locals.rawText)
+    .then(data => {
+      res.locals.data = data;
+      next();
+    })
+    .catch(err => {
+      next(err);
+    });
 };
 
 const decompressData = (req, res, next) => {
-  try {
-    const rawText = compressor.decompress(res.locals.data);
-    //const rawText = pako.inflate(res.locals.data, { to: 'string' });
-    if (typeof rawText !== "string") {
-      throw Error("pako.inflate returned a non-string");
-    }
-    res.locals.rawText = rawText;
-    next();
-  }
-  catch (err) {
-    next({
-      statusCode: 400,
-      clientErrorMessage: "Invalid URL - failed to decompress message data",
-      origin: err,
+  compressor.decompress(res.locals.data)
+    .then(text => {
+      if (typeof text !== "string") {
+        throw Error("Decompressor returned a non-string");
+      }
+      res.locals.rawText = text;
+      next();
+    })
+    .catch(err => {
+      next({
+        statusCode: 400,
+        clientErrorMessage: "Invalid URL - failed to decompress message data",
+        origin: err,
+      });
     });
-  }
 };
 
 const formUrls = (req, res, next) => {

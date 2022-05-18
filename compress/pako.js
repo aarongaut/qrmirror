@@ -6,7 +6,7 @@ class PakoCompressor {
   }
 
   compress(text) {
-    return pako.deflate(text);
+    return Promise.resolve(pako.deflate(text));
   }
 
   decompress(data) {
@@ -28,7 +28,7 @@ class PakoCompressor {
       newData.set(data, 1);
       data = newData;
     }
-    return pako.inflate(data, { to: 'string' });
+    return Promise.resolve(pako.inflate(data, { to: 'string' }));
   }
 };
 
