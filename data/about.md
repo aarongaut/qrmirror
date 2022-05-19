@@ -1,10 +1,10 @@
 # QR Mirror
 
-This site can be used to link a QR code to a short message. The full content of the message is encoded in the URL pointed to by the QR code, so nothing is stored server-side.
+This site can be used to link a QR code to a short message. The full content of the message is encoded in the URL pointed to by the QR code, so unlike with a URL shortener nothing is stored server-side.
 
 ## Usage
 
-Give it a try by changing the text below and hitting *Go!*. If you scan the resulting QR code it will link back to the same page. This can be used, for example, to transfer text from your PC to phone.
+Give it a try by changing the text below and hitting *Go!*. If you scan the resulting QR code it will link back to the same page. This can be used, for example, to quickly text from PC to phone or between phones.
 
 ## Formatting
 
