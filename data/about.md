@@ -4,7 +4,7 @@ This site can be used to link a QR code to a short message. The full content of 
 
 ## Usage
 
-Give it a try by changing the text below and hitting *Go!*. If you scan the resulting QR code it will link back to the same page. This can be used, for example, to quickly text from PC to phone or between phones.
+Give it a try by changing the text below and hitting *Go!*. If you scan the resulting QR code it will link back to the same page. This can be used, for example, to quickly transfer text from PC to phone or between phones.
 
 ## Formatting
 
